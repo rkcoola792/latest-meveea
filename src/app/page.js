@@ -1,7 +1,6 @@
-import Image from "next/image";
 
 export default function Home() {
   return (
-   <h2> Hey</h2>
+   <h2 className="text-7xl"> Hey</h2>
   );
 }
