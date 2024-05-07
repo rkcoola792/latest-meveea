@@ -26,8 +26,8 @@ const MobileMenu = () => {
             <hr />
 
             {categoryOpen && <div className='flex flex-col gap-2'>{categories.map((ele, index) => (
-        <Link href={`category/${ele.toLowerCase()}`}>
-          <p key={index} className="hover:bg-gray-100 px-4 my-1">
+        <Link key={index}  href={`category/${ele.toLowerCase()}`}>
+          <p className="hover:bg-gray-100 px-4 my-1">
             {ele}
             <hr />
           </p>
