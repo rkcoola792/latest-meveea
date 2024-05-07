@@ -14,7 +14,7 @@ const Dropdown = () => {
   return (
     <div className="flex flex-col z-[100]   w-[150px]  bg-white  rounded h-auto mt-12 border border-gray-50 shadow-md">
       {categories.map((ele, index) => (
-        <Link href={`category/${ele.toLowerCase()}`}>
+        <Link key={index} href={`category/${ele.toLowerCase()}`}>
           <p key={index} className="hover:bg-gray-100 px-4 my-1">
             {ele}
           </p>
