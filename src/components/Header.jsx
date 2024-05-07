@@ -26,7 +26,7 @@ const Dropdown = () => {
 
 const Header = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
 
   console.log(openDropdown);
   return (
