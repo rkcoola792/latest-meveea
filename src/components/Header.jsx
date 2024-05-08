@@ -14,7 +14,7 @@ const Dropdown = () => {
   return (
     <div className="flex flex-col z-[100]   w-[150px]  bg-white  rounded h-auto mt-12 border border-gray-50 shadow-md">
       {categories.map((ele, index) => (
-        <Link key={index} href={`category/${ele.toLowerCase()}`}>
+        <Link key={index} href={"/category"+`/${ele.toLowerCase()}`}>
           <p key={index} className="hover:bg-gray-100 px-4 my-1">
             {ele}
           </p>
@@ -33,12 +33,12 @@ const Header = () => {
     <>
       <div className="header-wrapper bg-white shadow-lg sticky top-0 z-[100]">
         <div className="header flex items-center justify-between max-w-[1280px] mx-auto lg:px-12  sm:px-8 px-4 py-6 sm:h-[60px] h-[50px]   ">
-          <div className="left-logo text-2xl font-bold">MEVEEA</div>
+          <Link href="/"><div className="left-logo text-2xl font-bold">MEVEEA</div></Link>
           <div className="center-links sm:flex gap-8 items-center font-medium hidden  ">
             <Link href="/">
               <p>Home</p>
             </Link>
-            <Link href="about">
+            <Link href="/about">
               <p>About</p>
             </Link>
 
@@ -60,12 +60,14 @@ const Header = () => {
             </Link>
           </div>
           <div className="right-cart flex gap-4 text-xl sm:text-2xl">
+            <Link href="/cart">
             <div className="cart-icon relative">
               <IoCartOutline />
               <div className="absolute bg-black text-white flex items-center justify-center rounded-[50%] h-4 w-4 sm:h-5 sm:w-5 -top-2 left-3 text-xs font-bold bg-opacity-90">
                 <p>3</p>
               </div>
             </div>
+            </Link>
             <div className="mobile-menu block sm:hidden cursor-pointer " onClick={()=>setMobileMenuOpen((prev)=>!prev)}>
               {mobileMenuOpen?<BiMenuAltRight />:<IoCloseSharp />}
                 

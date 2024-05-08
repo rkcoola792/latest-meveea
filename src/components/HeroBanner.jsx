@@ -31,19 +31,19 @@ const HeroBanner = () => {
         )}
       >
         <div className=" overflow-hidden lg:h-[500px] h-auto">
-          <img src="/slide1.webp " className="aspect-[16/9]  object-cover " />
+          <img src="/slide1.webp " className="md:aspect-[16/9] aspect-[9/16]  object-cover " />
           <div className="px-[15px] rounded-r-full md:px-[30px] py-[10px] md:py-[25px] font-oswald bg-black absolute bottom-[25px] md:bottom-[75px] left-0 text-white/[0.9] text-[15px] md:text-[30px] uppercase font-medium cursor-pointer opacity-60 hover:opacity-90">
             Shop now
           </div>
         </div>
         <div className=" overflow-hidden lg:h-[500px] h-auto">
-          <img src="/slide2.webp " className="aspect-[16/9] object-cover" />
+          <img src="/slide2.webp " className="md:aspect-[16/9] aspect-[9/16] object-cover" />
           <div className="px-[15px] md:px-[30px] py-[10px] md:py-[25px] font-oswald bg-black rounded-r-full absolute bottom-[25px] md:bottom-[75px] left-0 text-white/[0.9] text-[15px] md:text-[30px] uppercase font-medium cursor-pointer opacity-60 hover:opacity-90">
             Shop now
           </div>
         </div>
         <div className=" overflow-hidden lg:h-[500px] h-auto">
-          <img src="/slide3.webp " className="aspect-[16/9] object-cover " />
+          <img src="/slide3.webp " className="md:aspect-[16/9] aspect-[9/16] object-cover " />
           <div className="px-[15px] md:px-[30px] rounded-r-full py-[10px] md:py-[25px] font-oswald bg-black  absolute bottom-[25px] md:bottom-[75px] left-0 text-white/[0.9] text-[15px] md:text-[30px] uppercase font-medium cursor-pointer opacity-60 hover:opacity-90">
             Shop now
           </div>
