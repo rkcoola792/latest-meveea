@@ -5,7 +5,7 @@ const ProductCard = () => {
   return (
     <Link href="/product/1" className='transform overflow-hidden bg-white duration-200 hover:scale-105'>
       <img className='w-full' src="/tshirt.jpg" alt=""  />
-      <div className='description p-4 text-black/[0.9]'>
+      <div className='description pt-4 px-2 text-black/[0.9]'>
        
        <h2 className='text-lg font-medium'>Product Name</h2>
        <div className='prices flex items-center text-black/[0.5]'>
