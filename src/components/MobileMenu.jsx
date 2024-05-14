@@ -1,12 +1,26 @@
 "use client"
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { fetchDataFromApi } from '../../utils/api';
 
 const MobileMenu = () => {
-    const categories = ["Lower", "Pants", "Hoodies", "Tshirts"];
+    // const categories = ["Lower", "Pants", "Hoodies", "Tshirts"];
     const [categoryOpen,setCategoryOpen]=useState(false)
-  return (
+    const [categories,setCategories]=useState(null)
+    useEffect(()=>{
+      fetchCategories()
+
+    },[])
+    
+    const fetchCategories=async()=>{
+      const {data}=await fetchDataFromApi("/api/categories?populate=*")
+        setCategories(data)
+    }
+
+   console.log(categories)
+    return (
+    
     <div className='flex flex-col w-full px-6 gap-3'>
 
 <Link href="/">
@@ -25,14 +39,15 @@ const MobileMenu = () => {
             </div>
             <hr />
 
-            {categoryOpen && <div className='flex flex-col gap-2'>{categories.map((ele, index) => (
-        <Link key={index}  href={`category/${ele.toLowerCase()}`}>
+            {categoryOpen && <div className='flex flex-col gap-2'>{categories?.map((category, index) => (
+        <Link key={index}  href={`/category/${category?.attributes?.slug}`}>
           <p className="hover:bg-gray-100 px-4 my-1">
-            {ele}
+            {category?.attributes.name}
             <hr />
           </p>
         </Link>
-      ))}</div>}
+      ))}
+      </div>}
          
       <Link href="/contact">
               <p>Contact</p>

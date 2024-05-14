@@ -1,22 +1,24 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoCartOutline } from "react-icons/io5";
 import { BiMenuAltRight } from "react-icons/bi";
 import { IoCloseSharp } from "react-icons/io5";
 import MobileMenu from "./MobileMenu";
+import { fetchDataFromApi } from "../../utils/api";
 
 
-const categories = ["Lower", "Pants", "Hoodies", "Tshirts"];
-
-const Dropdown = () => {
+// const categories = ["Lower", "Pants", "Hoodies", "Tshirts"];
+const Dropdown = ({categories}) => {
+  console.log("recieved ", categories)
+ 
   return (
-    <div className="flex flex-col z-[100]   w-[150px]  bg-white  rounded h-auto mt-12 border border-gray-50 shadow-md">
-      {categories.map((ele, index) => (
-        <Link key={index} href={"/category"+`/${ele.toLowerCase()}`}>
+    <div className="flex flex-col z-[100] w-[150px]  bg-white  rounded h-auto mt-12 border border-gray-50 shadow-md">
+      {categories?.map((category, index) => (
+        <Link key={index} href={"/category"+`/${category?.attributes?.slug}`}>
           <p key={index} className="hover:bg-gray-100 px-4 my-1">
-            {ele}
+            {category?.attributes?.name}
           </p>
         </Link>
       ))}
@@ -25,10 +27,18 @@ const Dropdown = () => {
 };
 
 const Header = () => {
+  const [categories,setCategories]=useState(null);
   const [openDropdown, setOpenDropdown] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
 
-  console.log(openDropdown);
+  useEffect(()=>{
+    fetchCategories()
+  },[])
+  
+  const fetchCategories=async()=>{
+    const {data}=await fetchDataFromApi("/api/categories?populate=*")
+    setCategories(data)
+  }
   return (
     <>
       <div className="header-wrapper bg-white shadow-lg sticky top-0 z-[100]">
@@ -49,7 +59,7 @@ const Header = () => {
             >
               <p>Categories</p>
               <div className="absolute -top-3">
-                {openDropdown && <Dropdown></Dropdown>}
+                {openDropdown && <Dropdown categories={categories}></Dropdown>}
               </div>
               <div>
                 <RiArrowDropDownLine className="text-xl" />
