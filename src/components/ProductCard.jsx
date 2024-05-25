@@ -4,7 +4,7 @@ import Image from 'next/image'
 const ProductCard = ({data}) => {
   // console.log("recived product prop" , data)
   return (
-    <Link href={`product/${data?.attributes?.slug}`} className='transform overflow-hidden bg-white duration-200 hover:scale-105'>
+    <Link href={`/product/${data?.attributes?.slug}`} className='transform overflow-hidden bg-white duration-200 hover:scale-105'>
       <Image width={300} height={300} className='w-full sm:h-[300px] h-[200px] object-cover'  src={data?.attributes?.image?.data[0]?.attributes?.url} alt="product-image"  />
       <div className='description pt-4 px-2 text-black/[0.9]'>
        

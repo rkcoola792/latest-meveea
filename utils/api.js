@@ -4,7 +4,8 @@ export const  fetchDataFromApi =async(endpoint)=>{
     const options ={
         method:"GET",
         headers:{
-            Authorization:"Bearer" + STRAPI_API_TOKEN
+            Authorization:"Bearer" + STRAPI_API_TOKEN,
+            cache: "no-cache",
         }
     }
     const res=await fetch(`${API_URL}${endpoint}`,options)
