@@ -9,7 +9,6 @@ import MobileMenu from "./MobileMenu";
 import { fetchDataFromApi } from "../../utils/api";
 
 
-// const categories = ["Lower", "Pants", "Hoodies", "Tshirts"];
 const Dropdown = ({categories}) => {
   console.log("recieved ", categories)
  

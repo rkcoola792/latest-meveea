@@ -4,6 +4,7 @@ import RelatedProducts from "@/components/RelatedProducts";
 import Wrapper from "@/components/Wrapper";
 import React from "react";
 import { FaRegHeart } from "react-icons/fa";
+import { fetchDataFromApi } from "../../../../utils/api";
 
 const page = ({ params }) => {
   return (
@@ -114,3 +115,29 @@ const page = ({ params }) => {
 };
 
 export default page;
+
+
+export async function generateStaticParams() {
+  const products =await fetchDataFromApi("/api/products?populate=*")
+  const paths=category.data.map((ele)=>({
+      params:{
+        slug:ele.attributes.slug
+      }
+    }
+  )
+)
+   return paths 
+}
+ 
+async function getProduct(slug) {
+  const product =await fetchDataFromApi(`/api/products?filters[slug][$eq]=${slug}`)
+  const products =await fetchDataFromApi(`/api/products?populate=*&filters[categories][slug][$eq]=${slug}`)
+//  console.log("ccccccccccccccccc",products)
+  return {
+    props:{
+      product,
+      products,
+      slug
+    }
+  }
+}
