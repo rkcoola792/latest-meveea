@@ -6,21 +6,26 @@ import React from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { fetchDataFromApi } from "../../../../utils/api";
 
-const page = ({ params }) => {
+const page = async ({ params }) => {
+  // console.log("prammmmssss",params.productId)
+  const obj=await getProduct(params.productId)
+  // console.log("products",obj.props.product.data[0].attributes)
+  const {name,subtitle,price,description,size,originalPrice,image}=obj.props.product.data[0].attributes
+  // console.log("IMAGEE",image)
   return (
     <div className="w-full py-12">
       <Wrapper>
         <div className="flex flex-col lg:flex-row md:px-8 gap-[50px] lg:gap-[100px]">
           <div className="left w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
-            <ProductDetailsCarousel />
+            <ProductDetailsCarousel image={image} />
           </div>
           <div className="right flex-[1] py-3">
             <div className="product-title">
-              <h2 className="text-[34px] font-semibold mb-2">Drake T-shirt</h2>
+              <h2 className="text-[34px] font-semibold mb-2">{name}</h2>
             </div>
 
             <h3 className="subtitle text-lg font-semibold mb-5">
-              Drake's exclusive t-shirts
+              {subtitle}
             </h3>
 
             <p className="text-md font-medium text-black/[0.5]">
@@ -108,7 +113,7 @@ const page = ({ params }) => {
             </div>
           </div>
         </div>
-        <RelatedProducts/>
+        {/* <RelatedProducts/> */}
       </Wrapper>
     </div>
   );
@@ -119,7 +124,7 @@ export default page;
 
 export async function generateStaticParams() {
   const products =await fetchDataFromApi("/api/products?populate=*")
-  const paths=category.data.map((ele)=>({
+  const paths=products.data.map((ele)=>({
       params:{
         slug:ele.attributes.slug
       }
@@ -130,14 +135,12 @@ export async function generateStaticParams() {
 }
  
 async function getProduct(slug) {
-  const product =await fetchDataFromApi(`/api/products?filters[slug][$eq]=${slug}`)
+  const product =await fetchDataFromApi(`/api/products?populate=*&filters[slug][$eq]=${slug}`)
   const products =await fetchDataFromApi(`/api/products?populate=*&filters[categories][slug][$eq]=${slug}`)
 //  console.log("ccccccccccccccccc",products)
   return {
     props:{
       product,
-      products,
-      slug
     }
   }
 }
