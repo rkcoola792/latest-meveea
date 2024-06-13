@@ -11,9 +11,9 @@ const ProductCard = ({data}) => {
        <h2 className='sm:text-lg font-medium'>{data?.attributes?.name}</h2>
        <div className='prices flex items-center text-black/[0.5]'>
        <p className='mr-2 text-xs sm:text-lg font-semibold'>₹{data?.attributes?.price}</p>
-       <p className='text-xs sm:text-base font-medium line-through'>₹{data?.attributes?.originalPrice}</p>
-       <p className='text-xs sm:text-base font-medium ml-auto text-green-500'>{(data?.attributes?.originalPrice-data?.attributes?.price)/(data?.attributes?.originalPrice)*100}% off</p>
-
+       {data?.attributes?.originalPrice && <p className='text-xs sm:text-base font-medium line-through'>₹{data?.attributes?.originalPrice}</p>}
+       {data?.attributes?.originalPrice && <p className='text-xs sm:text-base font-medium ml-auto text-green-500'>{Math.floor((data?.attributes?.originalPrice-data?.attributes?.price)/(data?.attributes?.originalPrice)*100)}% off</p>
+      }
        </div>
 
       </div>

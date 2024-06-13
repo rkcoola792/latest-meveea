@@ -1,9 +1,12 @@
-// "use client"
+"use client"
 import HeroBanner from "@/components/HeroBanner";
 import ProductCard from "@/components/ProductCard";
 import Wrapper from "@/components/Wrapper";
+import { Provider } from "react-redux";
+import store from "../../store/store";
 // import { useEffect, useState } from "react";
 // import { fetchDataFromApi } from "../../utils/api";
+
 
 export default async function Home() {
   const getProducts = async () => {
@@ -21,6 +24,7 @@ export default async function Home() {
   const {data} = await getProducts();
   console.log(data);
   return (
+    // <Provider store={store}>
     <div className="">
       <HeroBanner />
       <Wrapper>
@@ -55,5 +59,6 @@ export default async function Home() {
         {/* products grid end */}
       </Wrapper>
     </div>
+      // </Provider>
   );
 }

@@ -1,8 +1,9 @@
 import { Inter, Oswald,Urbanist } from "next/font/google";
-
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Providers } from "../../store/provider";
+
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -16,7 +17,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={urbanist.className}>
       <Header/>
+      <Providers>
+
       {children}
+      </Providers>
       <Footer/>
       </body>
     </html>

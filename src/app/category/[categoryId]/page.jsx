@@ -8,9 +8,9 @@ const obj=await getProduct(params.categoryId)
   // console.log("category data",props.products)
 
   // const {products,category}=await getProduct("t-")
-  console.log("asdasdsa",params.categoryId)
+  // console.log("asdasdsa",params.categoryId)
 
-  console.log("products category",obj.props)
+  // console.log("products category",obj.props)
     return (
     <div className='w-full md:py-20'>
    {/* category page {props.params.categoryId} */}
