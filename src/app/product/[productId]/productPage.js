@@ -7,7 +7,10 @@ import ProductDetailsCarousel from "@/components/ProductDetailsCarousel";
 import Wrapper from "@/components/Wrapper";
 import { FaRegHeart } from "react-icons/fa";
 import store from "../../../../store/store";
-import { addToCart } from "../../../../store/cartSLice";
+import { addToCart } from "../../../../store/cartSlice";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductPageClient = ({ product }) => {
   const dispatch = useDispatch();
@@ -18,9 +21,23 @@ const ProductPageClient = ({ product }) => {
     product?.data[0]?.attributes;
   const [selectSize, setSelectSize] = useState("");
   const [showError, setShowError] = useState(false);
+  const notify=()=>{
+    toast.success('Added to cart!', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      // transition: Bounce,
+      });
+  }
   return (
     <div className="w-full py-12">
       <Provider store={store}>
+      <ToastContainer />
         <Wrapper>
           <div className="flex flex-col lg:flex-row md:px-8 gap-[50px] lg:gap-[100px]">
             <div className="left w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
@@ -105,12 +122,23 @@ const ProductPageClient = ({ product }) => {
 
               {/* add cart button */}
               <button
-                onClick={() => {if(!selectSize){setShowError(true)
+                onClick={() => {
+                  if(!selectSize){setShowError(true)
                                   document.getElementById("sizeGrid").scrollIntoView({
                                     block:"center",
                                     behavior:"smooth"
                                   })
-                }}}
+                }
+                else{
+                  dispatch(addToCart({
+                  ...product?.data[0],
+                  selectSize
+                }))
+                notify()
+                }
+                }
+                
+                }
                 className="mt-8 w-full py-4 rounded-full  bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
               >
                 <p>Add to cart</p>
