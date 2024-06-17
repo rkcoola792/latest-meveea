@@ -7,10 +7,11 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { IoCloseSharp } from "react-icons/io5";
 import MobileMenu from "./MobileMenu";
 import { fetchDataFromApi } from "../../utils/api";
+import { useSelector } from "react-redux";
 
 
 const Dropdown = ({categories}) => {
-  console.log("recieved ", categories)
+  // console.log("recieved ", categories)
  
   return (
     <div className="flex flex-col z-[100] w-[150px]  bg-white  rounded h-auto mt-12 border border-gray-50 shadow-md">
@@ -29,6 +30,7 @@ const Header = () => {
   const [categories,setCategories]=useState(null);
   const [openDropdown, setOpenDropdown] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
+  const {cartItems}=useSelector(state=>state.cart)
 
   useEffect(()=>{
     fetchCategories()
@@ -72,9 +74,9 @@ const Header = () => {
             <Link href="/cart">
             <div className="cart-icon relative">
               <IoCartOutline />
-              <div className="absolute bg-black text-white flex items-center justify-center rounded-[50%] h-4 w-4 sm:h-5 sm:w-5 -top-2 left-3 text-xs font-bold bg-opacity-90">
-                <p>3</p>
-              </div>
+             {cartItems.length> 0 && <div className="absolute bg-black text-white flex items-center justify-center rounded-[50%] h-4 w-4 sm:h-5 sm:w-5 -top-2 left-3 text-xs font-bold bg-opacity-90">
+                <p>{cartItems.length}</p>
+              </div>}
             </div>
             </Link>
             <div className="mobile-menu block sm:hidden cursor-pointer " onClick={()=>setMobileMenuOpen((prev)=>!prev)}>

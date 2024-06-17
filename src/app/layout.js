@@ -16,8 +16,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={urbanist.className}>
-      <Header/>
       <Providers>
+      <Header/>
 
       {children}
       </Providers>

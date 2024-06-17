@@ -17,8 +17,7 @@ const ProductPageClient = ({ product }) => {
   const cartItems = useSelector((store) => store.cart.cartItems);
   console.log("cart items", cartItems);
 
-  const { name, subtitle, price, description, size, originalPrice, image } =
-    product?.data[0]?.attributes;
+  const { name, subtitle, price, description, size, originalPrice, image } = product?.data[0]?.attributes;
   const [selectSize, setSelectSize] = useState("");
   const [showError, setShowError] = useState(false);
   const notify=()=>{
@@ -132,7 +131,8 @@ const ProductPageClient = ({ product }) => {
                 else{
                   dispatch(addToCart({
                   ...product?.data[0],
-                  selectSize
+                  selectSize,
+                  oneQuantityPrice:price
                 }))
                 notify()
                 }
