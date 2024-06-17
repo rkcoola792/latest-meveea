@@ -3,14 +3,15 @@ import CartItems from "@/components/CartItems";
 import Wrapper from "@/components/Wrapper";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 
 const page = () => {
-
-  
   const { cartItems } = useSelector((state) => state.cart);
-  
+  const subtotal=useMemo(()=>{
+    return cartItems.reduce((acc,curr)=>acc+curr.attributes.price,0)
+  },[cartItems])
+
  
   return (
     <div className="w-full md:py-12">
@@ -41,16 +42,16 @@ const page = () => {
                   <p>Subtotal</p>
                 </div>
                 <div className="right-price text-base md:text-lg font-medium">
-                  <p>$20.00</p>
+                  <p>{subtotal}</p>
                 </div>
               </div>
               <div className="text:sm md:text-base py-5 border-t mt-5">
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Asperiores adipisci aut, quisquam tempore perferendis
-                  cupiditate placeat optio repellendus esse officiis temporibus
-                  eveniet amet odio totam maxime, soluta tempora minima
-                  accusamus.
+                The subtotal reflects the total price of
+                                        your order, including duties and taxes,
+                                        before any applicable discounts. It does
+                                        not include delivery costs and
+                                        international transaction fees.
                 </p>
               </div>
             </div>

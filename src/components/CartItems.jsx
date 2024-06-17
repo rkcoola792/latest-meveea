@@ -1,19 +1,17 @@
 import React from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { updateCart } from "../../store/cartSlice";
+import { updateCart, removeItem } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
 
 const CartItems = ({ item }) => {
-
-    const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const updateCartItems = (e, key) => {
-
-    let payload={
-        key,
-        val:key="quantity"?parseInt(e.target.value): e.target.value,
-        id:item.id
-    }
-    dispatch(updateCart(payload))
+    let payload = {
+      key,
+      val: (key = "quantity" ? parseInt(e.target.value) : e.target.value),
+      id: item.id,
+    };
+    dispatch(updateCart(payload));
   };
   return (
     <div className="flex py-5 gap-3 md:gap-5 border-b">
@@ -45,8 +43,9 @@ const CartItems = ({ item }) => {
           <div className="flex items-center gap-2 md:gap-10 text-black/[0.5] text-sm md:text-md">
             <div className="flex items-center gap-1">
               <div className="font-semibold">Size:</div>
-              <select className="hover:text-black cursor-pointer"
-              onChange={(e) => updateCartItems(e, "selectSize")}
+              <select
+                className="hover:text-black cursor-pointer"
+                onChange={(e) => updateCartItems(e, "selectSize")}
               >
                 {item?.attributes?.size?.data?.map((ele, index) => (
                   <option
@@ -68,7 +67,11 @@ const CartItems = ({ item }) => {
               >
                 {Array.from({ length: 10 }, (_, i) => i + 1).map(
                   (ele, index) => (
-                    <option key={index} value={ele}  selected={item.selectSize == ele.size}>
+                    <option
+                      key={index}
+                      value={ele}
+                      selected={item.selectSize == ele.size}
+                    >
                       {ele}
                     </option>
                   )
@@ -76,7 +79,10 @@ const CartItems = ({ item }) => {
               </select>
             </div>
           </div>
-          <RiDeleteBinLine className="delete-icon cursor-pointer text-black/[0.5] hover:text-black text-[16px] md:text-[20px]" />
+          <RiDeleteBinLine
+            className="delete-icon cursor-pointer text-black/[0.5] hover:text-black text-[16px] md:text-[20px]"
+            onClick={() => dispatch(removeItem({ id: item.id }))}
+          />
         </div>
       </div>
     </div>

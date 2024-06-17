@@ -22,7 +22,7 @@ const ProductPageClient = ({ product }) => {
   const [showError, setShowError] = useState(false);
   const notify=()=>{
     toast.success('Added to cart!', {
-      position: "top-right",
+      position: "bottom-right",
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
